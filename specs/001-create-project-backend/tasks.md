@@ -30,27 +30,51 @@ This document provides a complete, dependency-ordered task list for implementing
 **Dependencies**: None
 **Acceptance**:
 - Solution file created with 4 projects: Domain, Application, Infrastructure, WebApi
+- All projects organized under `src/` folder following Clean Architecture
 - Project references configured: WebApi → Infrastructure → Application → Domain
 - All projects target .NET 9.0
 - Class libraries use `<Nullable>enable</Nullable>`
+- Directory structure includes: Entities/, Events/, Exceptions/, Interfaces/, ValueObjects/ in Domain
 ```bash
+# Create solution
 dotnet new sln -n PointOfSale
-dotnet new classlib -n Domain -f net9.0
-dotnet new classlib -n Application -f net9.0
-dotnet new classlib -n Infrastructure -f net9.0
-dotnet new webapi -n WebApi -f net9.0
-dotnet sln add Domain/Domain.csproj
-dotnet sln add Application/Application.csproj
-dotnet sln add Infrastructure/Infrastructure.csproj
-dotnet sln add WebApi/WebApi.csproj
-dotnet add Application/Application.csproj reference Domain/Domain.csproj
-dotnet add Infrastructure/Infrastructure.csproj reference Application/Application.csproj
-dotnet add WebApi/WebApi.csproj reference Infrastructure/Infrastructure.csproj
+
+# Create src directory
+mkdir src
+
+# Create projects in src folder
+dotnet new classlib -n Domain -o src/Domain -f net9.0
+dotnet new classlib -n Application -o src/Application -f net9.0
+dotnet new classlib -n Infrastructure -o src/Infrastructure -f net9.0
+dotnet new webapi -n WebApi -o src/WebApi -f net9.0
+
+# Add projects to solution
+dotnet sln add src/Domain/Domain.csproj
+dotnet sln add src/Application/Application.csproj
+dotnet sln add src/Infrastructure/Infrastructure.csproj
+dotnet sln add src/WebApi/WebApi.csproj
+
+# Configure project references
+dotnet add src/Application/Application.csproj reference src/Domain/Domain.csproj
+dotnet add src/Infrastructure/Infrastructure.csproj reference src/Application/Application.csproj
+dotnet add src/WebApi/WebApi.csproj reference src/Infrastructure/Infrastructure.csproj
+
+# Create Domain layer structure
+mkdir src/Domain/Entities/Sales
+mkdir src/Domain/Entities/Inventory
+mkdir src/Domain/Entities/Customers
+mkdir src/Domain/Entities/Employees
+mkdir src/Domain/Entities/Stores
+mkdir src/Domain/Common
+mkdir src/Domain/Events
+mkdir src/Domain/Exceptions
+mkdir src/Domain/Interfaces
+mkdir src/Domain/ValueObjects
 ```
 
 ---
 
-### T002 [P] Create BaseEntity and audit infrastructure
+### T002 [P] Create BaseEntity and audit infrastructure ✅
 **File**: `E:\Work\Self\point-of-sale\backend\net-9-point-of-sales\src\Domain\Common\BaseEntity.cs`
 **Purpose**: Implement base entity class with audit fields and soft delete support
 **Dependencies**: T001
