@@ -7,7 +7,10 @@
       "Bash(dotnet sln:*)",
       "Bash(dotnet add:*)",
       "Bash(dotnet build)",
-      "Bash(test:*)"
+      "Bash(test:*)",
+      "Bash(powershell.exe:*)",
+      "Bash(timeout:*)",
+      "Bash(cat:*)"
     ],
     "deny": [],
     "ask": []
