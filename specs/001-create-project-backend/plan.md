@@ -421,6 +421,7 @@ Step-by-step developer onboarding:
 ### 5. Agent Context File
 
 Execute: `.specify/scripts/powershell/update-agent-context.ps1 -AgentType claude`
+And Excute: `.specify/scripts/powershell/update-agent-context.ps1 -AgentType copilot`
 
 Generate `CLAUDE.md` at repository root with:
 - Project architecture overview
