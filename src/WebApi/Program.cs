@@ -1,5 +1,9 @@
+using Application;
+using Application.Common.Interfaces;
+using Infrastructure;
 using Serilog;
 using Serilog.Events;
+using WebApi.Services;
 
 // Configure Serilog
 Log.Logger = new LoggerConfiguration()
@@ -34,6 +38,27 @@ try
         .Enrich.WithProperty("Environment", context.HostingEnvironment.EnvironmentName));
 
     // Add services to the container.
+    builder.Services.AddHttpContextAccessor();
+    builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
+
+    // Register Application and Infrastructure services
+    builder.Services.AddApplicationServices();
+    builder.Services.AddInfrastructureServices(builder.Configuration);
+
+    // Configure CORS
+    var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>() ?? [];
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy("DefaultCorsPolicy", policy =>
+        {
+            policy.WithOrigins(allowedOrigins)
+                  .AllowAnyMethod()
+                  .AllowAnyHeader()
+                  .AllowCredentials()
+                  .WithExposedHeaders("Content-Disposition");
+        });
+    });
+
     // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
     builder.Services.AddOpenApi();
 
@@ -55,6 +80,17 @@ try
 
     var app = builder.Build();
 
+    // Security headers middleware
+    app.Use(async (context, next) =>
+    {
+        context.Response.Headers.Append("X-Content-Type-Options", "nosniff");
+        context.Response.Headers.Append("X-Frame-Options", "DENY");
+        context.Response.Headers.Append("X-XSS-Protection", "1; mode=block");
+        context.Response.Headers.Append("Referrer-Policy", "strict-origin-when-cross-origin");
+        context.Response.Headers.Append("Permissions-Policy", "geolocation=(), microphone=(), camera=()");
+        await next();
+    });
+
     // Configure Serilog request logging
     app.UseSerilogRequestLogging(options =>
     {
@@ -74,7 +110,16 @@ try
         app.MapOpenApi();
     }
 
+    // Use CORS
+    app.UseCors("DefaultCorsPolicy");
+
     app.UseHttpsRedirection();
+
+    // HSTS for production
+    if (!app.Environment.IsDevelopment())
+    {
+        app.UseHsts();
+    }
 
     // Map health check endpoint
     app.MapHealthChecks("/health", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
