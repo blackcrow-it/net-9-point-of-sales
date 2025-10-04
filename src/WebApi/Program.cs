@@ -37,6 +37,22 @@ try
     // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
     builder.Services.AddOpenApi();
 
+    // Configure health checks
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+    var redisConnection = builder.Configuration.GetConnectionString("RedisConnection");
+
+    builder.Services.AddHealthChecks()
+        .AddNpgSql(
+            connectionString!,
+            name: "postgres",
+            failureStatus: Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus.Unhealthy,
+            tags: new[] { "db", "sql", "postgres" })
+        .AddRedis(
+            redisConnection!,
+            name: "redis",
+            failureStatus: Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus.Unhealthy,
+            tags: new[] { "cache", "redis" });
+
     var app = builder.Build();
 
     // Configure Serilog request logging
@@ -59,6 +75,12 @@ try
     }
 
     app.UseHttpsRedirection();
+
+    // Map health check endpoint
+    app.MapHealthChecks("/health", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
+    {
+        ResponseWriter = HealthChecks.UI.Client.UIResponseWriter.WriteHealthCheckUIResponse
+    });
 
 var summaries = new[]
 {
