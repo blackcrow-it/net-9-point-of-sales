@@ -268,7 +268,7 @@ dotnet add WebApi/WebApi.csproj package Swashbuckle.AspNetCore
 
 ## Phase B: Domain Layer - Entities (T016-T041)
 
-### T016 [P] Create Order entity
+### T016 [X] [P] Create Order entity
 **File**: `E:\Work\Self\point-of-sale\backend\net-9-point-of-sales\src\Domain\Entities\Sales\Order.cs`
 **Purpose**: Implement Order aggregate root with business logic
 **Dependencies**: T002
@@ -284,7 +284,7 @@ dotnet add WebApi/WebApi.csproj package Swashbuckle.AspNetCore
 
 ---
 
-### T017 [P] Create OrderItem entity
+### T017 [X] [P] Create OrderItem entity
 **File**: `E:\Work\Self\point-of-sale\backend\net-9-point-of-sales\src\Domain\Entities\Sales\OrderItem.cs`
 **Purpose**: Implement OrderItem entity for order line items
 **Dependencies**: T002, T016
@@ -296,7 +296,7 @@ dotnet add WebApi/WebApi.csproj package Swashbuckle.AspNetCore
 
 ---
 
-### T018 [P] Create Payment entity
+### T018 [X] [P] Create Payment entity
 **File**: `E:\Work\Self\point-of-sale\backend\net-9-point-of-sales\src\Domain\Entities\Sales\Payment.cs`
 **Purpose**: Implement Payment entity for payment transactions
 **Dependencies**: T002
@@ -309,7 +309,7 @@ dotnet add WebApi/WebApi.csproj package Swashbuckle.AspNetCore
 
 ---
 
-### T019 [P] Create Shift entity
+### T019 [X] [P] Create Shift entity
 **File**: `E:\Work\Self\point-of-sale\backend\net-9-point-of-sales\src\Domain\Entities\Sales\Shift.cs`
 **Purpose**: Implement Shift entity for cashier work sessions
 **Dependencies**: T002
@@ -323,7 +323,7 @@ dotnet add WebApi/WebApi.csproj package Swashbuckle.AspNetCore
 
 ---
 
-### T020 [P] Create PaymentMethod entity
+### T020 [X] [P] Create PaymentMethod entity
 **File**: `E:\Work\Self\point-of-sale\backend\net-9-point-of-sales\src\Domain\Entities\Sales\PaymentMethod.cs`
 **Purpose**: Implement PaymentMethod configuration entity
 **Dependencies**: T002
@@ -334,7 +334,7 @@ dotnet add WebApi/WebApi.csproj package Swashbuckle.AspNetCore
 
 ---
 
-### T021 [P] Create Product entity
+### T021 [X] [P] Create Product entity
 **File**: `E:\Work\Self\point-of-sale\backend\net-9-point-of-sales\src\Domain\Entities\Inventory\Product.cs`
 **Purpose**: Implement Product aggregate root
 **Dependencies**: T002
@@ -347,7 +347,7 @@ dotnet add WebApi/WebApi.csproj package Swashbuckle.AspNetCore
 
 ---
 
-### T022 [P] Create ProductVariant entity
+### T022 [X] [P] Create ProductVariant entity
 **File**: `E:\Work\Self\point-of-sale\backend\net-9-point-of-sales\src\Domain\Entities\Inventory\ProductVariant.cs`
 **Purpose**: Implement ProductVariant for product variations
 **Dependencies**: T002, T021
@@ -359,7 +359,7 @@ dotnet add WebApi/WebApi.csproj package Swashbuckle.AspNetCore
 
 ---
 
-### T023 [P] Create Category entity
+### T023 [X] [P] Create Category entity
 **File**: `E:\Work\Self\point-of-sale\backend\net-9-point-of-sales\src\Domain\Entities\Inventory\Category.cs`
 **Purpose**: Implement Category with hierarchical structure
 **Dependencies**: T002
@@ -370,7 +370,7 @@ dotnet add WebApi/WebApi.csproj package Swashbuckle.AspNetCore
 
 ---
 
-### T024 [P] Create Brand entity
+### T024 [X] [P] Create Brand entity
 **File**: `E:\Work\Self\point-of-sale\backend\net-9-point-of-sales\src\Domain\Entities\Inventory\Brand.cs`
 **Purpose**: Implement Brand entity for product manufacturers
 **Dependencies**: T002
@@ -381,7 +381,7 @@ dotnet add WebApi/WebApi.csproj package Swashbuckle.AspNetCore
 
 ---
 
-### T025 [P] Create InventoryLevel entity
+### T025 [X] [P] Create InventoryLevel entity
 **File**: `E:\Work\Self\point-of-sale\backend\net-9-point-of-sales\src\Domain\Entities\Inventory\InventoryLevel.cs`
 **Purpose**: Implement InventoryLevel for stock tracking
 **Dependencies**: T002, T022
@@ -394,7 +394,7 @@ dotnet add WebApi/WebApi.csproj package Swashbuckle.AspNetCore
 
 ---
 
-### T026 [P] Create InventoryReceipt entity
+### T026 [X] [P] Create InventoryReceipt entity
 **File**: `E:\Work\Self\point-of-sale\backend\net-9-point-of-sales\src\Domain\Entities\Inventory\InventoryReceipt.cs`
 **Purpose**: Implement InventoryReceipt for goods receipt
 **Dependencies**: T002
@@ -407,7 +407,7 @@ dotnet add WebApi/WebApi.csproj package Swashbuckle.AspNetCore
 
 ---
 
-### T027 [P] Create InventoryReceiptItem entity
+### T027 [X] [P] Create InventoryReceiptItem entity
 **File**: `E:\Work\Self\point-of-sale\backend\net-9-point-of-sales\src\Domain\Entities\Inventory\InventoryReceiptItem.cs`
 **Purpose**: Implement line items for inventory receipts
 **Dependencies**: T002, T026
@@ -419,7 +419,7 @@ dotnet add WebApi/WebApi.csproj package Swashbuckle.AspNetCore
 
 ---
 
-### T028 [P] Create InventoryIssue entity
+### T028 [X] [P] Create InventoryIssue entity
 **File**: `E:\Work\Self\point-of-sale\backend\net-9-point-of-sales\src\Domain\Entities\Inventory\InventoryIssue.cs`
 **Purpose**: Implement InventoryIssue for adjustments and transfers
 **Dependencies**: T002
@@ -432,7 +432,7 @@ dotnet add WebApi/WebApi.csproj package Swashbuckle.AspNetCore
 
 ---
 
-### T029 [P] Create InventoryIssueItem entity
+### T029 [X] [P] Create InventoryIssueItem entity
 **File**: `E:\Work\Self\point-of-sale\backend\net-9-point-of-sales\src\Domain\Entities\Inventory\InventoryIssueItem.cs`
 **Purpose**: Implement line items for inventory issues
 **Dependencies**: T002, T028
@@ -443,7 +443,7 @@ dotnet add WebApi/WebApi.csproj package Swashbuckle.AspNetCore
 
 ---
 
-### T030 [P] Create Stocktake entity
+### T030 [X] [P] Create Stocktake entity
 **File**: `E:\Work\Self\point-of-sale\backend\net-9-point-of-sales\src\Domain\Entities\Inventory\Stocktake.cs`
 **Purpose**: Implement Stocktake for physical inventory counts
 **Dependencies**: T002
@@ -456,7 +456,7 @@ dotnet add WebApi/WebApi.csproj package Swashbuckle.AspNetCore
 
 ---
 
-### T031 [P] Create StocktakeItem entity
+### T031 [X] [P] Create StocktakeItem entity
 **File**: `E:\Work\Self\point-of-sale\backend\net-9-point-of-sales\src\Domain\Entities\Inventory\StocktakeItem.cs`
 **Purpose**: Implement counted items in stocktake
 **Dependencies**: T002, T030
@@ -468,7 +468,7 @@ dotnet add WebApi/WebApi.csproj package Swashbuckle.AspNetCore
 
 ---
 
-### T032 [P] Create Customer entity
+### T032 [X] [P] Create Customer entity
 **File**: `E:\Work\Self\point-of-sale\backend\net-9-point-of-sales\src\Domain\Entities\Customers\Customer.cs`
 **Purpose**: Implement Customer aggregate root
 **Dependencies**: T002
@@ -481,7 +481,7 @@ dotnet add WebApi/WebApi.csproj package Swashbuckle.AspNetCore
 
 ---
 
-### T033 [P] Create CustomerGroup entity
+### T033 [X] [P] Create CustomerGroup entity
 **File**: `E:\Work\Self\point-of-sale\backend\net-9-point-of-sales\src\Domain\Entities\Customers\CustomerGroup.cs`
 **Purpose**: Implement CustomerGroup for segmentation
 **Dependencies**: T002
@@ -492,7 +492,7 @@ dotnet add WebApi/WebApi.csproj package Swashbuckle.AspNetCore
 
 ---
 
-### T034 [P] Create LoyaltyTransaction entity
+### T034 [X] [P] Create LoyaltyTransaction entity
 **File**: `E:\Work\Self\point-of-sale\backend\net-9-point-of-sales\src\Domain\Entities\Customers\LoyaltyTransaction.cs`
 **Purpose**: Implement LoyaltyTransaction for points tracking
 **Dependencies**: T002, T032
@@ -504,7 +504,7 @@ dotnet add WebApi/WebApi.csproj package Swashbuckle.AspNetCore
 
 ---
 
-### T035 [P] Create Debt entity
+### T035 [X] [P] Create Debt entity
 **File**: `E:\Work\Self\point-of-sale\backend\net-9-point-of-sales\src\Domain\Entities\Customers\Debt.cs`
 **Purpose**: Implement Debt for account receivables
 **Dependencies**: T002, T032
@@ -518,7 +518,7 @@ dotnet add WebApi/WebApi.csproj package Swashbuckle.AspNetCore
 
 ---
 
-### T036 [P] Create User entity
+### T036 [X] [P] Create User entity
 **File**: `E:\Work\Self\point-of-sale\backend\net-9-point-of-sales\src\Domain\Entities\Employees\User.cs`
 **Purpose**: Implement User entity for employees
 **Dependencies**: T002
@@ -530,7 +530,7 @@ dotnet add WebApi/WebApi.csproj package Swashbuckle.AspNetCore
 
 ---
 
-### T037 [P] Create Role entity
+### T037 [X] [P] Create Role entity
 **File**: `E:\Work\Self\point-of-sale\backend\net-9-point-of-sales\src\Domain\Entities\Employees\Role.cs`
 **Purpose**: Implement Role with permissions
 **Dependencies**: T002
@@ -541,7 +541,7 @@ dotnet add WebApi/WebApi.csproj package Swashbuckle.AspNetCore
 
 ---
 
-### T038 [P] Create Permission entity
+### T038 [X] [P] Create Permission entity
 **File**: `E:\Work\Self\point-of-sale\backend\net-9-point-of-sales\src\Domain\Entities\Employees\Permission.cs`
 **Purpose**: Implement Permission for granular access control
 **Dependencies**: T002, T037
@@ -552,7 +552,7 @@ dotnet add WebApi/WebApi.csproj package Swashbuckle.AspNetCore
 
 ---
 
-### T039 [P] Create Commission entity
+### T039 [X] [P] Create Commission entity
 **File**: `E:\Work\Self\point-of-sale\backend\net-9-point-of-sales\src\Domain\Entities\Employees\Commission.cs`
 **Purpose**: Implement Commission for sales commissions
 **Dependencies**: T002, T036
@@ -565,7 +565,7 @@ dotnet add WebApi/WebApi.csproj package Swashbuckle.AspNetCore
 
 ---
 
-### T040 [P] Create Store entity
+### T040 [X] [P] Create Store entity
 **File**: `E:\Work\Self\point-of-sale\backend\net-9-point-of-sales\src\Domain\Entities\Stores\Store.cs`
 **Purpose**: Implement Store entity for locations
 **Dependencies**: T002
@@ -576,7 +576,7 @@ dotnet add WebApi/WebApi.csproj package Swashbuckle.AspNetCore
 
 ---
 
-### T041 [P] Create Supplier entity
+### T041 [X] [P] Create Supplier entity
 **File**: `E:\Work\Self\point-of-sale\backend\net-9-point-of-sales\src\Domain\Entities\Stores\Supplier.cs`
 **Purpose**: Implement Supplier entity
 **Dependencies**: T002
