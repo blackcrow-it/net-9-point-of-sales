@@ -10,7 +10,8 @@
       "Bash(test:*)",
       "Bash(powershell.exe:*)",
       "Bash(timeout:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(dotnet test:*)"
     ],
     "deny": [],
     "ask": []
