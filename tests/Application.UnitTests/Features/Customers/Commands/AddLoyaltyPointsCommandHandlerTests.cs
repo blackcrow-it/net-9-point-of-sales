@@ -41,6 +41,7 @@ public class AddLoyaltyPointsCommandHandlerTests
         );
 
         _contextMock.Setup(c => c.Customers).Returns(new List<Customer> { customer }.BuildMockDbSet().Object);
+        _contextMock.Setup(c => c.LoyaltyTransactions).Returns(new List<LoyaltyTransaction>().BuildMockDbSet().Object);
         _contextMock.Setup(c => c.SaveChangesAsync(It.IsAny<CancellationToken>())).ReturnsAsync(1);
 
         // Act
@@ -134,6 +135,6 @@ public class AddLoyaltyPointsCommandHandlerTests
 
         // Assert
         result.IsSuccess.Should().BeFalse();
-        result.Errors.Should().Contain(e => e.Contains("Points must be greater than 0"));
+        result.Errors.Should().Contain(e => e.Contains("Points must be greater than zero"));
     }
 }

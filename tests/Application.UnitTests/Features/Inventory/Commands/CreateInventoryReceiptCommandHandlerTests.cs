@@ -49,6 +49,7 @@ public class CreateInventoryReceiptCommandHandlerTests
         _contextMock.Setup(c => c.Suppliers).Returns(new List<Supplier> { supplier }.BuildMockDbSet().Object);
         _contextMock.Setup(c => c.ProductVariants).Returns(new List<ProductVariant> { variant }.BuildMockDbSet().Object);
         _contextMock.Setup(c => c.InventoryReceipts).Returns(new List<InventoryReceipt>().BuildMockDbSet().Object);
+        _contextMock.Setup(c => c.InventoryReceiptItems).Returns(new List<InventoryReceiptItem>().BuildMockDbSet().Object);
         _contextMock.Setup(c => c.SaveChangesAsync(It.IsAny<CancellationToken>())).ReturnsAsync(1);
 
         // Act
@@ -74,6 +75,7 @@ public class CreateInventoryReceiptCommandHandlerTests
         );
 
         _contextMock.Setup(c => c.Stores).Returns(new List<Store>().BuildMockDbSet().Object);
+        _contextMock.Setup(c => c.InventoryReceipts).Returns(new List<InventoryReceipt>().BuildMockDbSet().Object);
 
         // Act
         var result = await _handler.Handle(command, CancellationToken.None);
@@ -103,6 +105,7 @@ public class CreateInventoryReceiptCommandHandlerTests
 
         _contextMock.Setup(c => c.Stores).Returns(new List<Store> { store }.BuildMockDbSet().Object);
         _contextMock.Setup(c => c.Suppliers).Returns(new List<Supplier> { supplier }.BuildMockDbSet().Object);
+        _contextMock.Setup(c => c.InventoryReceipts).Returns(new List<InventoryReceipt>().BuildMockDbSet().Object);
 
         // Act
         var result = await _handler.Handle(command, CancellationToken.None);

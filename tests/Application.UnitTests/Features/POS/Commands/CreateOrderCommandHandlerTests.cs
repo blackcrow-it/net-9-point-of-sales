@@ -28,15 +28,32 @@ public class CreateOrderCommandHandlerTests
         var storeId = Guid.NewGuid();
         var customerId = Guid.NewGuid();
         var productVariantId = Guid.NewGuid();
+        var productId = Guid.NewGuid();
 
         var store = new Store { Id = storeId, Code = "ST001", Name = "Main Store", Type = StoreType.RetailStore };
         var customer = new Customer { Id = customerId, CustomerNumber = "CUS001", Name = "Test Customer" };
+        var product = new Domain.Entities.Inventory.Product
+        {
+            Id = productId,
+            Name = "Test Product",
+            SKU = "PRD001"
+        };
         var productVariant = new ProductVariant 
         { 
             Id = productVariantId, 
             SKU = "PRD001", 
             RetailPrice = 100000,
-            ProductId = Guid.NewGuid()
+            ProductId = productId,
+            Product = product
+        };
+        var inventoryLevel = new InventoryLevel
+        {
+            Id = Guid.NewGuid(),
+            StoreId = storeId,
+            ProductVariantId = productVariantId,
+            OnHandQuantity = 100,
+            AvailableQuantity = 100,
+            ReservedQuantity = 0
         };
 
         var userId = Guid.NewGuid();
@@ -51,6 +68,8 @@ public class CreateOrderCommandHandlerTests
         _contextMock.Setup(c => c.Customers).Returns(new List<Customer> { customer }.BuildMockDbSet().Object);
         _contextMock.Setup(c => c.ProductVariants).Returns(new List<ProductVariant> { productVariant }.BuildMockDbSet().Object);
         _contextMock.Setup(c => c.Orders).Returns(new List<Order>().BuildMockDbSet().Object);
+        _contextMock.Setup(c => c.OrderItems).Returns(new List<OrderItem>().BuildMockDbSet().Object);
+        _contextMock.Setup(c => c.InventoryLevels).Returns(new List<InventoryLevel> { inventoryLevel }.BuildMockDbSet().Object);
         _contextMock.Setup(c => c.SaveChangesAsync(It.IsAny<CancellationToken>())).ReturnsAsync(1);
 
         // Act
@@ -76,6 +95,7 @@ public class CreateOrderCommandHandlerTests
         );
 
         _contextMock.Setup(c => c.Stores).Returns(new List<Store>().BuildMockDbSet().Object);
+        _contextMock.Setup(c => c.Orders).Returns(new List<Order>().BuildMockDbSet().Object);
 
         // Act
         var result = await _handler.Handle(command, CancellationToken.None);
@@ -105,6 +125,7 @@ public class CreateOrderCommandHandlerTests
 
         _contextMock.Setup(c => c.Stores).Returns(new List<Store> { store }.BuildMockDbSet().Object);
         _contextMock.Setup(c => c.Customers).Returns(new List<Customer> { customer }.BuildMockDbSet().Object);
+        _contextMock.Setup(c => c.Orders).Returns(new List<Order>().BuildMockDbSet().Object);
 
         // Act
         var result = await _handler.Handle(command, CancellationToken.None);

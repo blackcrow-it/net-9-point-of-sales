@@ -116,12 +116,15 @@ public class LoginCommandHandlerTests
     {
         // Arrange
         var hashedPassword = BCrypt.Net.BCrypt.HashPassword("password123", workFactor: 12);
+        var role = new Role { Id = Guid.NewGuid(), Name = "Cashier", IsActive = true };
         var user = new User
         {
             Id = Guid.NewGuid(),
             Username = "testuser",
             PasswordHash = hashedPassword,
-            IsActive = false // Inactive user
+            IsActive = false, // Inactive user
+            RoleId = role.Id,
+            Role = role
         };
 
         var command = new LoginCommand("testuser", "password123");
@@ -130,6 +133,7 @@ public class LoginCommandHandlerTests
         var mockSet = users.BuildMockDbSet();
         
         _contextMock.Setup(c => c.Users).Returns(mockSet.Object);
+        _passwordHasherMock.Setup(p => p.VerifyPassword(It.IsAny<string>(), It.IsAny<string>())).Returns(true);
 
         // Act
         var result = await _handler.Handle(command, CancellationToken.None);
