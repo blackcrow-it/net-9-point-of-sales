@@ -17,6 +17,17 @@ public class CreateInventoryReceiptCommandHandler : IRequestHandler<CreateInvent
 
     public async Task<Result<Guid>> Handle(CreateInventoryReceiptCommand request, CancellationToken cancellationToken)
     {
+        // Validate store exists
+        var storeExists = await _context.Stores
+            .AnyAsync(s => s.Id == request.StoreId && s.IsActive, cancellationToken);
+
+        if (!storeExists)
+            return Result<Guid>.Failure("Store not found or inactive");
+
+        // Validate items not empty
+        if (request.Items == null || !request.Items.Any())
+            return Result<Guid>.Failure("Receipt must have at least one item");
+
         // Generate receipt number
         var today = DateTime.UtcNow.Date;
         var todayReceiptsCount = await _context.InventoryReceipts

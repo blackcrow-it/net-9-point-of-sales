@@ -27,7 +27,7 @@ public class CreateInventoryReceiptCommandHandlerTests
         var supplierId = Guid.NewGuid();
         var productVariantId = Guid.NewGuid();
 
-        var store = new Store { Id = storeId, Code = "ST001", Name = "Main Store", Type = StoreType.Warehouse };
+        var store = new Store { Id = storeId, Code = "ST001", Name = "Main Store", Type = StoreType.Warehouse, IsActive = true };
         var supplier = new Supplier { Id = supplierId, Code = "SUP001", Name = "Main Supplier" };
         var variant = new ProductVariant { Id = productVariantId, SKU = "PRD001", ProductId = Guid.NewGuid() };
 
@@ -82,7 +82,7 @@ public class CreateInventoryReceiptCommandHandlerTests
 
         // Assert
         result.IsSuccess.Should().BeFalse();
-        result.Errors.Should().Contain("Store not found");
+        result.Errors.Should().Contain("Store not found or inactive");
     }
 
     [Fact]
@@ -91,7 +91,7 @@ public class CreateInventoryReceiptCommandHandlerTests
         // Arrange
         var storeId = Guid.NewGuid();
         var supplierId = Guid.NewGuid();
-        var store = new Store { Id = storeId, Code = "ST001", Name = "Main Store", Type = StoreType.Warehouse };
+        var store = new Store { Id = storeId, Code = "ST001", Name = "Main Store", Type = StoreType.Warehouse, IsActive = true };
         var supplier = new Supplier { Id = supplierId, Code = "SUP001", Name = "Test Supplier" };
 
         var command = new CreateInventoryReceiptCommand(

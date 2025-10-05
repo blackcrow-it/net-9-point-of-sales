@@ -30,7 +30,7 @@ public class CreateOrderCommandHandlerTests
         var productVariantId = Guid.NewGuid();
         var productId = Guid.NewGuid();
 
-        var store = new Store { Id = storeId, Code = "ST001", Name = "Main Store", Type = StoreType.RetailStore };
+        var store = new Store { Id = storeId, Code = "ST001", Name = "Main Store", Type = StoreType.RetailStore, IsActive = true };
         var customer = new Customer { Id = customerId, CustomerNumber = "CUS001", Name = "Test Customer" };
         var product = new Domain.Entities.Inventory.Product
         {
@@ -102,7 +102,7 @@ public class CreateOrderCommandHandlerTests
 
         // Assert
         result.IsSuccess.Should().BeFalse();
-        result.Errors.Should().Contain("Store not found");
+        result.Errors.Should().Contain("Store not found or inactive");
     }
 
     [Fact]
@@ -111,7 +111,7 @@ public class CreateOrderCommandHandlerTests
         // Arrange
         var storeId = Guid.NewGuid();
         var customerId = Guid.NewGuid();
-        var store = new Store { Id = storeId, Code = "ST001", Name = "Main Store", Type = StoreType.RetailStore };
+        var store = new Store { Id = storeId, Code = "ST001", Name = "Main Store", Type = StoreType.RetailStore, IsActive = true };
         var customer = new Customer { Id = customerId, CustomerNumber = "CUS001", Name = "Test Customer" };
 
         var command = new CreateOrderCommand(
