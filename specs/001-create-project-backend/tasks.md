@@ -1516,7 +1516,7 @@ dotnet add WebApi/WebApi.csproj package Swashbuckle.AspNetCore
 
 ---
 
-### T122 Create initial database migration
+### T122 [X] Create initial database migration
 **File**: `E:\Work\Self\point-of-sale\backend\net-9-point-of-sales\src\Infrastructure\Persistence\Migrations\`
 **Purpose**: Generate initial EF Core migration with all entities
 **Dependencies**: T005, T096-T121
